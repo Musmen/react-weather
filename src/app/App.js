@@ -1,13 +1,10 @@
 import './scss/styles.scss';
 
 import React from 'react';
+import Header from './components/header/Header';
 
 function App() {
-  return (
-    <h1>
-      Hello, <span className="green">World!</span>
-    </h1>
-  );
+  return <Header />;
 }
 
 export default App;
