@@ -54,7 +54,7 @@ function Header() {
             alt="weather icon"
           />
         ))}
-      <p>{JSON.stringify(forecast)}</p>
+      <p>{JSON.stringify(forecast && forecast.current.weather[0])}</p>
     </>
   );
 }
