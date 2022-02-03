@@ -1,0 +1,89 @@
+.switcher__container {
+  position: relative;
+  align-self: center;
+
+  width: 48px;
+  margin-right: 20px;
+
+  background-color: transparent;
+  border-radius: 20px;
+
+  user-select: none;
+}
+
+.switcher {
+  display: block;
+  width: 95%;
+  height: 100%;
+  margin: 0 auto;
+
+  outline: none;
+  border-radius: 20px;
+
+  z-index: -1;
+
+  box-shadow: none;
+}
+
+.switcher__label {
+  display: block;
+
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+
+  overflow: hidden;
+  cursor: pointer;
+
+  transition: all 0.3s ease-in-out;
+
+  &:focus,
+  &:hover,
+  &:active {
+    border-color: #ffffff;
+    box-shadow: 0px 0px 5px 3px #ffffff;
+  }
+}
+
+.switcher__inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+
+  transition: margin 0.3s ease-in 0s;
+}
+
+.switcher__inner:before,
+.switcher__inner:after {
+  box-sizing: border-box;
+  display: block;
+  float: left;
+  width: 50%;
+  height: 40px;
+  padding: 0;
+
+  line-height: 40px;
+  color: #ffffff;
+}
+
+.switcher__inner:before {
+  background-color: #6586b1cc;
+  font-size: 0.8rem;
+  content: '° C';
+  text-align: center;
+}
+
+.switcher__inner:after {
+  background-color: #6586b1cc;
+  font-size: 0.8rem;
+  text-align: right;
+  content: '° F';
+  text-align: center;
+}
+
+.switcher:checked + .switcher__inner {
+  margin-left: 0;
+}
+
+.switcher:checked + .switcher__switch {
+  right: 5px;
+}
