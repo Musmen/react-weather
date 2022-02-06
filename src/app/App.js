@@ -1,9 +1,9 @@
-import './scss/styles.scss';
+import './App.scss';
 
 import React, { useMemo, useState } from 'react';
 
-import Header from './components/header/Header';
 import ControlBlock from './containers/control-block/ControlBlock';
+import MainBlock from './containers/main-block/MainBlock';
 import LanguageContext from './components/language-context/LanguageContext';
 
 import { DEFAULT_LANGUAGE } from './common/constants';
@@ -20,12 +20,19 @@ function App() {
     [currentLanguage, changeLanguage],
   );
 
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const changeSearchQuery = (newSearchQuery) => {
+    setSearchQuery(newSearchQuery);
+  };
+
   return (
     <LanguageContext.Provider value={languageState}>
       <>
         <p>{currentLanguage}</p>
-        <ControlBlock />
-        <Header />
+        <p>{searchQuery}</p>
+        <ControlBlock searchQuery={searchQuery} changeSearchQuery={changeSearchQuery} />
+        <MainBlock searchQuery={searchQuery} />
       </>
     </LanguageContext.Provider>
   );

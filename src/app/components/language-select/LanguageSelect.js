@@ -1,4 +1,4 @@
-import './language-select.styles.scss';
+import './LanguageSelect.scss';
 
 import React, { useContext } from 'react';
 import { LANGUAGES } from '../../common/constants';

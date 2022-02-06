@@ -1,8 +1,8 @@
-import './bg-change-button.styles.scss';
+import './BgChangeButton.scss';
 
 import React from 'react';
 import propTypes from 'prop-types';
-import BgChangeButtonIcon from './bg-change-button.icon';
+import BgChangeButtonIcon from './BgChangeButtonIcon';
 
 function BgChangeButton(props) {
   const { changeBg } = props;

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import propTypes from 'prop-types';
+
+import { getCoordinatesByPlaceName, parseCoordinates } from '../../api/open-cage';
 import getForecastByCoordinates from '../../api/open-weather';
-import PlaceInfo from '../place-info/PlaceInfo';
+import PlaceInfo from '../../components/place-info/PlaceInfo';
 
 const updateForecast = async (coordinates, setForecast) => {
   const forecastResponse = await getForecastByCoordinates(coordinates);
@@ -15,7 +18,16 @@ const updateCoordinates = (setCoordinates) => {
   });
 };
 
-function Header() {
+const updateCoordinatesByPlaceName = async (placeName, setCoordinates) => {
+  const placeInfo = await getCoordinatesByPlaceName(placeName);
+  const coordinates = parseCoordinates(placeInfo);
+  setCoordinates(coordinates);
+
+  console.log(placeInfo);
+  console.log('updateCoordinatesBySearchQuery');
+};
+
+function MainBlock({ searchQuery }) {
   const [coordinates, setCoordinates] = useState({
     latitude: null,
     longitude: null,
@@ -24,6 +36,10 @@ function Header() {
     updateCoordinates(setCoordinates);
     console.log('updateCoordinates');
   }, []);
+  useEffect(() => {
+    if (searchQuery === '') return;
+    updateCoordinatesByPlaceName(searchQuery, setCoordinates);
+  }, [searchQuery]);
   const { latitude, longitude } = coordinates;
 
   const [forecast, setForecast] = useState(null);
@@ -59,4 +75,12 @@ function Header() {
   );
 }
 
-export default Header;
+MainBlock.propTypes = {
+  searchQuery: propTypes.string,
+};
+
+MainBlock.defaultProps = {
+  searchQuery: '',
+};
+
+export default MainBlock;

@@ -1,4 +1,4 @@
-import './temperature-switcher.styles.scss';
+import './TemperatureSwitcher.scss';
 
 import React from 'react';
 import propTypes from 'prop-types';

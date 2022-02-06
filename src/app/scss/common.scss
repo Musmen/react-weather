@@ -1,0 +1,86 @@
+@import './variables.scss';
+@import './mixins.scss';
+
+html {
+  font-size: 22px;
+  line-height: 34px;
+  font-family: 'Lobster', 'Candara', 'Trebuchet MS', 'Geneva', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.05rem;
+
+  background-color: #f8f9fa;
+
+  user-select: none;
+
+  color: white;
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  @media only screen and (max-width: 650px) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  @media only screen and (max-width: 550px) {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+body {
+  min-height: 100vh;
+  margin: 0 auto;
+
+  background-color: rgba(83, 88, 95, 0.7);
+  background-image: url('./../public/assets/img/background.jpg');
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+
+  transition: background-image 1s;
+}
+
+p {
+  margin: 0;
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+
+  border: 0;
+
+  white-space: nowrap;
+
+  clip-path: inset(100%);
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+.centralizer {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.button {
+  border-radius: 10px;
+}
