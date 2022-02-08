@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { getPlaceInfoByGeoCoordinates, parsePlace } from '../../api/open-cage';
 
 const updatePlace = async (coordinates, setPlace) => {
@@ -21,9 +21,9 @@ function PlaceInfo({ coordinates }) {
 }
 
 PlaceInfo.propTypes = {
-  coordinates: PropTypes.shape({
-    latitude: PropTypes.number,
-    longitude: PropTypes.number,
+  coordinates: propTypes.shape({
+    latitude: propTypes.number,
+    longitude: propTypes.number,
   }),
 };
 

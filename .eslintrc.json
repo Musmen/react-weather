@@ -26,7 +26,8 @@
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/state-in-constructor": "off"
+    "react/state-in-constructor": "off",
+    "consistent-return": "off"
   },
   "ignorePatterns": ["**/*.html"]
 }

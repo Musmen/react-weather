@@ -1,0 +1,53 @@
+@import '../../scss/mixins.scss';
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
+.mapboxgl-ctrl .mapboxgl-ctrl-logo {
+  display: none;
+}
+
+.main__map-container {
+  margin: 0 auto;
+}
+
+.main__map-container .map {
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+
+  border-radius: 20px;
+
+  mask-image: url('../../../public/assets/img/mask.png');
+  -webkit-mask-image: url('../../../public/assets/img/mask.png');
+  mask-size: cover;
+  -webkit-mask-size: cover;
+
+  @media only screen and (max-width: 1150px) {
+    width: 400px;
+    height: 400px;
+    margin-top: 20px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 350px;
+    height: 350px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    width: 300px;
+    height: 300px;
+  }
+
+  @media only screen and (max-width: 400px) {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+.map__description {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 10px;
+
+  text-align: center;
+  text-transform: uppercase;
+}

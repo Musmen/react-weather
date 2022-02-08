@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import { getCoordinatesByPlaceName, parseCoordinates } from '../../api/open-cage';
 import getForecastByCoordinates from '../../api/open-weather';
 import PlaceInfo from '../../components/place-info/PlaceInfo';
+import Map from '../../components/map/Map';
 
 const updateForecast = async (coordinates, setForecast) => {
   const forecastResponse = await getForecastByCoordinates(coordinates);
@@ -71,6 +72,7 @@ function MainBlock({ searchQuery }) {
           />
         ))}
       <p>{JSON.stringify(forecast && forecast.current.weather[0])}</p>
+      <Map coordinates={coordinates} />
     </>
   );
 }
