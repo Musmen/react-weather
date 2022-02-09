@@ -5,11 +5,7 @@
   display: none;
 }
 
-.main__map-container {
-  margin: 0 auto;
-}
-
-.main__map-container .map {
+.map {
   width: 500px;
   height: 500px;
   margin: 0 auto;
@@ -41,13 +37,4 @@
     width: 250px;
     height: 250px;
   }
-}
-
-.map__description {
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 10px;
-
-  text-align: center;
-  text-transform: uppercase;
 }

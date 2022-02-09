@@ -1,4 +1,4 @@
-import fetchData from '../common/helpers';
+import { fetchData } from '../common/helpers';
 
 const API_KEY = process.env.OPEN_WEATHER_KEY;
 

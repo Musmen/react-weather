@@ -45,12 +45,7 @@ function Map({ coordinates }) {
   }, [latitude, longitude]);
 
   console.log('render map!');
-  return (
-    <div className="main__map-container">
-      <div ref={mapContainer} className="map" />
-      <div className="map__description" />
-    </div>
-  );
+  return <div ref={mapContainer} className="map" />;
 }
 
 Map.propTypes = {
