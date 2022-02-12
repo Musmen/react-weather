@@ -5,6 +5,7 @@ import { getCoordinatesByPlaceName, parseCoordinates } from '../../api/open-cage
 import getForecastByCoordinates from '../../api/open-weather';
 import PlaceInfo from '../../components/place-info/PlaceInfo';
 import MapBlock from '../map-block/MapBlock';
+import DailyForecast from '../../components/daily-forecast/DailyForecast';
 
 const updateForecast = async (coordinates, setForecast) => {
   const forecastResponse = await getForecastByCoordinates(coordinates);
@@ -52,26 +53,9 @@ function MainBlock({ searchQuery }) {
 
   return (
     <>
-      <h1>
-        Hello from header! latitude: {`${latitude} `}
-        longitude: {longitude}
-      </h1>
+      <h1>{`Latitude: ${latitude} Longitude: ${longitude}`}</h1>
       <PlaceInfo coordinates={coordinates} />
-      {forecast && (
-        <img
-          src={`https://openweathermap.org/img/w/${forecast.current.weather[0].icon}.png`}
-          alt="weather icon"
-        />
-      )}
-      {forecast &&
-        forecast.daily.map((dailyForecast) => (
-          <img
-            src={`https://openweathermap.org/img/w/${dailyForecast.weather[0].icon}.png`}
-            key={dailyForecast.dt}
-            alt="weather icon"
-          />
-        ))}
-      <p>{JSON.stringify(forecast && forecast.current.weather[0])}</p>
+      <DailyForecast forecast={forecast} />
       <MapBlock coordinates={coordinates} />
     </>
   );

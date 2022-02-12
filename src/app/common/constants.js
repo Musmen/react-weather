@@ -6,3 +6,5 @@ export const DEFAULT_MAP_CONFIG = {
   style: 'mapbox://styles/mapbox/outdoors-v11',
   zoom: MAP_ZOOM_DEFAULT,
 };
+
+export const DEFAULT_TIMEZONE = 'Europe/Minsk';
