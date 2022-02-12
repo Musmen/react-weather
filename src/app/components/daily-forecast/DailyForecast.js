@@ -3,6 +3,7 @@ import './DailyForecast.scss';
 import React from 'react';
 import propTypes from 'prop-types';
 import Clock from '../clock/Clock';
+import FullDate from '../full-date/FullDate';
 import { DEFAULT_TIMEZONE } from '../../common/constants';
 
 function DailyForecast({ forecast }) {
@@ -25,7 +26,10 @@ function DailyForecast({ forecast }) {
           />
         ))}
       <p>{JSON.stringify(forecast && forecast.current.weather[0])}</p>
-      <Clock timeZone={timezone} />
+      <div className="TimeDateBlock">
+        <FullDate timeZone={timezone} />
+        <Clock timeZone={timezone} />
+      </div>
     </div>
   );
 }
