@@ -5,7 +5,7 @@ import { getCoordinatesByPlaceName, parseCoordinates } from '../../api/open-cage
 import getForecastByCoordinates from '../../api/open-weather';
 import PlaceInfo from '../../components/place-info/PlaceInfo';
 import MapBlock from '../map-block/MapBlock';
-import DailyForecast from '../../components/daily-forecast/DailyForecast';
+import DailyForecast from '../daily-forecast/DailyForecast';
 
 const updateForecast = async (coordinates, setForecast) => {
   const forecastResponse = await getForecastByCoordinates(coordinates);

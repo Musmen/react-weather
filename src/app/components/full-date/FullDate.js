@@ -1,22 +1,19 @@
 import './FullDate.scss';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
+
 import Date from '../date/Date';
+
 import { getLocalDateObject } from '../../common/helpers';
 import { DEFAULT_TIMEZONE } from '../../common/constants';
 
 function FullDate({ timeZone }) {
-  const [currentWeekDay, setCurrentWeekDay] = useState('');
-
-  useEffect(() => {
-    const { weekDay } = getLocalDateObject(timeZone);
-    setCurrentWeekDay(weekDay);
-  }, [timeZone]);
+  const { weekDay } = getLocalDateObject(timeZone);
 
   return (
     <p className="full-date">
-      <span className="week-day">{currentWeekDay}</span>
+      <span className="week-day">{weekDay}</span>
       <Date timeZone={timeZone} />
     </p>
   );
