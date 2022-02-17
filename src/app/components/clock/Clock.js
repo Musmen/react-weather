@@ -1,7 +1,6 @@
-import './Clock.scss';
-
 import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
+
 import { getLocalDateObject } from '../../common/helpers';
 import { DEFAULT_TIMEZONE } from '../../common/constants';
 

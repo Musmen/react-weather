@@ -19,7 +19,14 @@ export const getPlaceInfoByGeoCoordinates = async ({ latitude, longitude }) => {
   return placeInfo;
 };
 
-export const parsePlace = (placeInfo) => placeInfo.results[0].components.city;
+export const parsePlace = (locationInfo) =>
+  locationInfo.city ||
+  locationInfo.town ||
+  locationInfo.village ||
+  locationInfo.county ||
+  locationInfo.state ||
+  '';
+export const parseCountry = (locationInfo) => locationInfo.country || locationInfo.formatted || '';
 
 export const getCoordinatesByPlaceName = async (placeName) => {
   const placeInfo = await fetchData(`${API_URL_REQUEST}${placeName}`);

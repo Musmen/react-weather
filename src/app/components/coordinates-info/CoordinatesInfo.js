@@ -7,7 +7,7 @@ import { getCoordinatesDegreesAndMinutesString } from '../../common/helpers';
 function CoordinatesInfo({ coordinates }) {
   const { latitude, longitude } = getCoordinatesDegreesAndMinutesString(coordinates);
   return (
-    <p className="coordinates__description">{`Latitude: ${latitude} Longitude: ${longitude}`}</p>
+    <p className="coordinates-description">{`Latitude: ${latitude} Longitude: ${longitude}`}</p>
   );
 }
 
