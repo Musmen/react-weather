@@ -1,14 +1,14 @@
-import './DailyForecast.scss';
+import './TodayInfo.scss';
 
 import React from 'react';
 import propTypes from 'prop-types';
 
 import TimeDateBlock from '../time-date-block/TimeDateBlock';
-import DailyWeather from '../../components/daily-weather/DailyWeather';
+import DayFullWeather from '../day-full-weather/DayFullWeather';
 
 import { DEFAULT_TIMEZONE } from '../../common/constants';
 
-function DailyForecast({ forecast }) {
+function TodayInfo({ forecast }) {
   if (!forecast) return null;
 
   const { timezone: timeZone } = forecast;
@@ -22,16 +22,9 @@ function DailyForecast({ forecast }) {
   const { icon, description } = forecast.current.weather[0];
 
   return (
-    <div className="container">
-      {forecast.daily.map((dailyForecast) => (
-        <img
-          src={`https://openweathermap.org/img/w/${dailyForecast.weather[0].icon}.png`}
-          key={dailyForecast.dt}
-          alt="weather icon"
-        />
-      ))}
+    <>
       <TimeDateBlock timeZone={timeZone} />
-      <DailyWeather
+      <DayFullWeather
         temperature={temperature}
         feelsLike={feelsLike}
         humidity={humidity}
@@ -39,11 +32,11 @@ function DailyForecast({ forecast }) {
         description={description}
         icon={icon}
       />
-    </div>
+    </>
   );
 }
 
-DailyForecast.propTypes = {
+TodayInfo.propTypes = {
   forecast: propTypes.shape({
     current: propTypes.shape({
       temp: propTypes.number,
@@ -71,10 +64,10 @@ DailyForecast.propTypes = {
   }),
 };
 
-DailyForecast.defaultProps = {
+TodayInfo.defaultProps = {
   forecast: {
     timeZone: DEFAULT_TIMEZONE,
   },
 };
 
-export default DailyForecast;
+export default TodayInfo;

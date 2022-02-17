@@ -1,0 +1,22 @@
+.weather-summary {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+
+  @media only screen and (max-width: 400px) {
+    font-size: 14px;
+  }
+}
+
+.weather-description,
+.feels-like-temperature,
+.wind-speed,
+.humidity {
+  text-transform: uppercase;
+}
+
+.wind-speed {
+  .lower-case {
+    text-transform: lowercase;
+  }
+}

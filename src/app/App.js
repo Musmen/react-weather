@@ -28,12 +28,10 @@ function App() {
 
   return (
     <LanguageContext.Provider value={languageState}>
-      <>
-        <p>{currentLanguage}</p>
-        <p>{searchQuery}</p>
-        <ControlBlock searchQuery={searchQuery} changeSearchQuery={changeSearchQuery} />
-        <MainBlock searchQuery={searchQuery} />
-      </>
+      <p>{currentLanguage}</p>
+      <p>{searchQuery}</p>
+      <ControlBlock searchQuery={searchQuery} changeSearchQuery={changeSearchQuery} />
+      <MainBlock searchQuery={searchQuery} />
     </LanguageContext.Provider>
   );
 }

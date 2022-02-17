@@ -1,0 +1,41 @@
+.week-forecast-container {
+  display: flex;
+  justify-content: center;
+
+  .day-weather-temperature {
+    font-size: 4rem;
+    line-height: 5rem;
+
+    @media only screen and (max-width: 550px) {
+      font-size: 3rem;
+      line-height: 4rem;
+    }
+
+    @media only screen and (max-width: 350px) {
+      font-size: 2rem;
+      line-height: 3rem;
+    }
+  }
+
+  .day-weather-icon {
+    width: 96px;
+    height: 96px;
+    margin-left: 10px;
+    margin-right: 20px;
+
+    @media only screen and (max-width: 1150px) {
+      width: 78px;
+      height: 78px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      width: 64px;
+      height: 64px;
+    }
+
+    @media only screen and (max-width: 400px) {
+      width: 48px;
+      height: 48px;
+    }
+  }
+}

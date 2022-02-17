@@ -1,11 +1,15 @@
+import './MainBlock.scss';
+
 import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 
 import { getCoordinatesByPlaceName, parseCoordinates } from '../../api/open-cage';
 import getForecastByCoordinates from '../../api/open-weather';
+
 import PlaceInfo from '../../components/place-info/PlaceInfo';
 import MapBlock from '../map-block/MapBlock';
-import DailyForecast from '../daily-forecast/DailyForecast';
+import TodayInfo from '../today-info/TodayInfo';
+import WeekForecast from '../week-forecast/WeekForecast';
 
 const updateForecast = async (coordinates, setForecast) => {
   const forecastResponse = await getForecastByCoordinates(coordinates);
@@ -54,9 +58,14 @@ function MainBlock({ searchQuery }) {
   return (
     <>
       <h1>{`Latitude: ${latitude} Longitude: ${longitude}`}</h1>
-      <PlaceInfo coordinates={coordinates} />
-      <DailyForecast forecast={forecast} />
-      <MapBlock coordinates={coordinates} />
+      <div className="main-container">
+        <div className="left-container">
+          <PlaceInfo coordinates={coordinates} />
+          <TodayInfo forecast={forecast} />
+          <WeekForecast forecast={forecast} />
+        </div>
+        <MapBlock coordinates={coordinates} />
+      </div>
     </>
   );
 }
