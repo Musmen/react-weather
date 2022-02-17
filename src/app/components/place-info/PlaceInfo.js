@@ -6,7 +6,7 @@ import { getPlaceInfoByGeoCoordinates, parseCountry, parsePlace } from '../../ap
 
 const updatePlaceAndCountry = async (coordinates, setPlace, setCountry) => {
   const locationResponse = await getPlaceInfoByGeoCoordinates(coordinates);
-  const locationInfo = locationResponse.results[0].components;
+  const locationInfo = locationResponse.results[0];
   setPlace(parsePlace(locationInfo));
   setCountry(parseCountry(locationInfo));
 };

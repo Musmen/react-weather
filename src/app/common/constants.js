@@ -9,6 +9,8 @@ export const DEFAULT_MAP_CONFIG = {
 
 export const DEFAULT_TIMEZONE = 'Europe/Minsk';
 
+export const ONE_SECOND_IN_MILLISECONDS = 1000;
+
 export const SKYCONS_ICONS_OPTIONS = {
   monochrome: false,
   color: {

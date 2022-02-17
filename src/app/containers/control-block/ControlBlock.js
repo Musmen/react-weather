@@ -22,10 +22,11 @@ function ControlBlock({ searchQuery, changeSearchQuery }) {
 
   return (
     <div className="control-block">
-      <BgChangeButton changeBg={changeBg} />
-      <TemperatureSwitcher isCelcius={isCelcius} changeTemperatureUnit={changeTemperatureUnit} />
-      <p>{isCelcius.toString()}</p>
-      <LanguageSelect />
+      <div className="buttons-selects-block">
+        <BgChangeButton changeBg={changeBg} />
+        <TemperatureSwitcher isCelcius={isCelcius} changeTemperatureUnit={changeTemperatureUnit} />
+        <LanguageSelect />
+      </div>
       <SearchBlock searchQuery={searchQuery} changeSearchQuery={changeSearchQuery} />
     </div>
   );

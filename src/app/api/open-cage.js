@@ -19,14 +19,21 @@ export const getPlaceInfoByGeoCoordinates = async ({ latitude, longitude }) => {
   return placeInfo;
 };
 
-export const parsePlace = (locationInfo) =>
-  locationInfo.city ||
-  locationInfo.town ||
-  locationInfo.village ||
-  locationInfo.county ||
-  locationInfo.state ||
-  '';
-export const parseCountry = (locationInfo) => locationInfo.country || locationInfo.formatted || '';
+export const parsePlace = (locationInfo) => {
+  const placeInfo = locationInfo.components;
+
+  return (
+    placeInfo.city ||
+    placeInfo.town ||
+    placeInfo.village ||
+    placeInfo.county ||
+    placeInfo.state ||
+    locationInfo.formatted.split(',')[0] ||
+    ''
+  );
+};
+export const parseCountry = (locationInfo) =>
+  locationInfo.components.country || locationInfo.formatted || '';
 
 export const getCoordinatesByPlaceName = async (placeName) => {
   const placeInfo = await fetchData(`${API_URL_REQUEST}${placeName}`);

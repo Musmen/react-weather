@@ -6,7 +6,11 @@ import { DEFAULT_TIMEZONE } from '../../common/constants';
 
 function Date({ timeZone }) {
   const { day, month } = getLocalDateObject(timeZone);
-  return <span className="date">{`${day} ${month}`}</span>;
+  return (
+    <span className="date">
+      {day} {month}
+    </span>
+  );
 }
 
 Date.propTypes = {

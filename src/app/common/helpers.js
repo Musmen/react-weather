@@ -20,7 +20,7 @@ const getCoordinateDegreesAndMinutesString = (coordinate) => {
   return `${degrees}° ${minutes}'`;
 };
 
-export const getCoordinatesDegreesAndMinutesString = (coordinates) => {
+export const getCoordinatesDegreesAndMinutesObject = (coordinates) => {
   const { latitude, longitude } = coordinates;
 
   return {

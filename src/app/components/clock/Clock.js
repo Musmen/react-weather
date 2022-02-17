@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 
 import { getLocalDateObject } from '../../common/helpers';
-import { DEFAULT_TIMEZONE } from '../../common/constants';
+import { DEFAULT_TIMEZONE, ONE_SECOND_IN_MILLISECONDS } from '../../common/constants';
 
 function Clock({ timeZone }) {
   const [time, setTime] = useState('');
@@ -11,7 +11,7 @@ function Clock({ timeZone }) {
     const clockTimer = setInterval(() => {
       const currentTime = getLocalDateObject(timeZone).time;
       setTime(currentTime);
-    }, 1000);
+    }, ONE_SECOND_IN_MILLISECONDS);
 
     return () => {
       clearInterval(clockTimer);

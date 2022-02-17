@@ -10,7 +10,7 @@ import { DEFAULT_LANGUAGE } from './common/constants';
 
 function App() {
   const [currentLanguage, setLanguage] = useState(DEFAULT_LANGUAGE);
-
+  // нужно перенести все, что касается языка в его котекст провайдер
   const changeLanguage = ({ target: { value } }) => {
     setLanguage(value);
   };
@@ -28,8 +28,6 @@ function App() {
 
   return (
     <LanguageContext.Provider value={languageState}>
-      <p>{currentLanguage}</p>
-      <p>{searchQuery}</p>
       <ControlBlock searchQuery={searchQuery} changeSearchQuery={changeSearchQuery} />
       <MainBlock searchQuery={searchQuery} />
     </LanguageContext.Provider>

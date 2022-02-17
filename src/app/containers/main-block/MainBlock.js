@@ -56,17 +56,16 @@ function MainBlock({ searchQuery }) {
   }, [latitude, longitude]);
 
   return (
-    <>
-      <h1>{`Latitude: ${latitude} Longitude: ${longitude}`}</h1>
-      <div className="main-container">
-        <div className="left-container">
-          <PlaceInfo coordinates={coordinates} />
-          <TodayInfo forecast={forecast} />
-          <WeekForecast forecast={forecast} />
-        </div>
-        <MapBlock coordinates={coordinates} />
+    <div className="main-container">
+      <div className="left-container">
+        <PlaceInfo coordinates={coordinates} />
+        <TodayInfo forecast={forecast} />
+        {/* // может стоить уменьшит вложенность, сократим компоненты... */}
+        <WeekForecast forecast={forecast} />
       </div>
-    </>
+      <MapBlock coordinates={coordinates} />
+      {/* // может стоить уменьшит вложенность, сократим компоненты... */}
+    </div>
   );
 }
 

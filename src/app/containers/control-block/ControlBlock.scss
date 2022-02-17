@@ -1,4 +1,14 @@
-.control-block {
+@import '../../scss/variables.scss';
+@import '../../scss/mixins.scss';
+
+.control-block,
+.buttons-selects-block {
   display: flex;
+
   align-items: center;
+}
+
+.control-block {
+  flex-direction: column;
+  padding-top: 10px;
 }
