@@ -19,10 +19,10 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer__wrapper">
-        <p className="author__description">
-          <h2 className="author__title title visually-hidden">Author</h2>
-          by @Musmen
-        </p>
+        <h2 className="author__title title">
+          <span className="visually-hidden">Author</span>
+          <span className="author__description">by @Musmen</span>
+        </h2>
         <ul className="social__list list">
           {SOCIALS.map((social) => (
             <li className="social__item" key={social.id}>

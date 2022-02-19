@@ -1,3 +1,5 @@
+import './Clock.scss';
+
 import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 
