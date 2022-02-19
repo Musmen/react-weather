@@ -1,0 +1,67 @@
+.footer {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8), 0px 0px 4px rgba(0, 0, 0, 0.12);
+}
+
+.footer__wrapper {
+  max-width: 1500px;
+  margin: 0 auto;
+
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  min-height: 60px;
+  padding: 10px;
+}
+
+.author__description {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: 700;
+  color: #6586b1;
+
+  -webkit-text-stroke: 1px #ffffff69;
+}
+
+.social__list {
+  display: flex;
+  margin: 0;
+}
+
+.social__link {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+
+  border-radius: 50%;
+  transition: all 0.5s;
+
+  &:focus,
+  &:hover,
+  &:active {
+    background-color: #dedede;
+    outline: none;
+    box-shadow: 0px 0px 5px 3px #ffffff;
+  }
+}
+
+.social__icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+
+  background-size: 32px 32px;
+  background-repeat: no-repeat;
+
+  &-github {
+    background-image: url('../../../public/assets/img/github.png');
+    background-position: 2px 1px;
+  }
+
+  &-telegram {
+    background-image: url('../../../public/assets/img/telegram.png');
+  }
+}

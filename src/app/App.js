@@ -6,6 +6,7 @@ import ControlBlock from './containers/control-block/ControlBlock';
 import MainBlock from './containers/main-block/MainBlock';
 import LanguageContext from './components/language-context/LanguageContext';
 import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 
 import { DEFAULT_LANGUAGE } from './common/constants';
 
@@ -27,11 +28,14 @@ function App() {
   };
 
   return (
-    <LanguageContext.Provider value={languageState}>
+    <>
       <Header />
-      <ControlBlock searchQuery={searchQuery} changeSearchQuery={changeSearchQuery} />
-      <MainBlock searchQuery={searchQuery} />
-    </LanguageContext.Provider>
+      <LanguageContext.Provider value={languageState}>
+        <ControlBlock searchQuery={searchQuery} changeSearchQuery={changeSearchQuery} />
+        <MainBlock searchQuery={searchQuery} />
+      </LanguageContext.Provider>
+      <Footer />
+    </>
   );
 }
 
