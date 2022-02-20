@@ -1,0 +1,57 @@
+.spinner {
+  position: fixed;
+  top: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(206, 215, 219, 0.9);
+
+  z-index: 9999;
+}
+
+.machine {
+  width: 25vw;
+
+  fill: #5e6fa3;
+}
+
+.small {
+  animation: counter-rotation 2.5s infinite linear;
+  transform-origin: 100px 225px;
+}
+
+.medium {
+  animation: rotation 3.75s infinite linear;
+  transform-origin: 254px 379px;
+}
+
+.large {
+  animation: counter-rotation 5s infinite linear;
+  transform-origin: 461px 173px;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes counter-rotation {
+  from {
+    transform: rotate(359deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}

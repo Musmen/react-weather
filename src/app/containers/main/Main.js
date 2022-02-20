@@ -1,10 +1,9 @@
-import './Main.scss';
-
 import React, { useCallback, useMemo, useState } from 'react';
 
 import ControlBlock from '../control-block/ControlBlock';
 import WidgetBlock from '../widget-block/WidgetBlock';
 import LanguageContext from '../../components/language-context/LanguageContext';
+import Spinner from '../../components/spinner/Spinner';
 
 import { DEFAULT_LANGUAGE } from '../../common/constants';
 
@@ -57,7 +56,7 @@ function Main() {
 
   return (
     <LanguageContext.Provider value={languageState}>
-      {isLoading && <p className="spinner">Is loading...</p>}
+      {isLoading && <Spinner />}
       <p>{`isCelcius ${isCelcius}`}</p>
       <ControlBlock
         searchQuery={searchQuery}
