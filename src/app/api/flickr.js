@@ -17,4 +17,9 @@ const fetchImage = async (...query) => {
   return imageSrc.photos.photo[0].url_l;
 };
 
-export default fetchImage;
+const changeBg = async () => {
+  const imageSrc = await fetchImage('winter');
+  document.body.style.backgroundImage = `url(${imageSrc})`;
+};
+
+export default changeBg;

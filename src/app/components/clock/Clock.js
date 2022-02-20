@@ -1,24 +1,27 @@
 import './Clock.scss';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import propTypes from 'prop-types';
 
 import { getLocalDateObject } from '../../common/helpers';
 import { DEFAULT_TIMEZONE, ONE_SECOND_IN_MILLISECONDS } from '../../common/constants';
 
 function Clock({ timeZone }) {
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState(getLocalDateObject(timeZone).time);
+
+  const tick = useCallback(() => {
+    const currentTime = getLocalDateObject(timeZone).time;
+    setTime(currentTime);
+  }, [timeZone]);
 
   useEffect(() => {
-    const clockTimer = setInterval(() => {
-      const currentTime = getLocalDateObject(timeZone).time;
-      setTime(currentTime);
-    }, ONE_SECOND_IN_MILLISECONDS);
+    tick();
+    const clockTimer = setInterval(tick, ONE_SECOND_IN_MILLISECONDS);
 
     return () => {
       clearInterval(clockTimer);
     };
-  }, [timeZone]);
+  }, [tick]);
 
   return <p className="clock">{time}</p>;
 }

@@ -17,4 +17,11 @@ const getForecastByCoordinates = async ({ latitude, longitude }) => {
   return forecast;
 };
 
-export default getForecastByCoordinates;
+const updateForecast = async (coordinates, setForecast, changeLoadingState) => {
+  const forecastResponse = await getForecastByCoordinates(coordinates);
+  setForecast(forecastResponse);
+  changeLoadingState(false);
+  console.log(forecastResponse);
+};
+
+export default updateForecast;

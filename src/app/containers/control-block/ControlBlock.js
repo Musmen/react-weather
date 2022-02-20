@@ -1,25 +1,17 @@
 import './ControlBlock.scss';
 
-import React, { useState } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 
 import BgChangeButton from '../../components/bg-change-button/BgChangeButton';
-import fetchImage from '../../api/flickr';
 import TemperatureSwitcher from '../../components/temperature-switcher/TemperatureSwitcher';
 import LanguageSelect from '../../components/language-select/LanguageSelect';
 import SearchBlock from '../../components/search-block/SeacrhBlock';
 
-const changeBg = async () => {
-  const imageSrc = await fetchImage('winter');
-  document.body.style.backgroundImage = `url(${imageSrc})`;
-};
+import changeBg from '../../api/flickr';
 
-function ControlBlock({ searchQuery, changeSearchQuery }) {
-  const [isCelcius, setTemperatureUnit] = useState(true);
-  const changeTemperatureUnit = () => {
-    setTemperatureUnit(!isCelcius);
-  };
-
+function ControlBlock({ searchQuery, changeSearchQuery, isCelcius, changeTemperatureUnit }) {
+  console.log('Render ControlBlock');
   return (
     <div className="control-block">
       <div className="buttons-selects-block">
@@ -35,11 +27,15 @@ function ControlBlock({ searchQuery, changeSearchQuery }) {
 ControlBlock.propTypes = {
   searchQuery: propTypes.string,
   changeSearchQuery: propTypes.func,
+  isCelcius: propTypes.bool,
+  changeTemperatureUnit: propTypes.func,
 };
 
 ControlBlock.defaultProps = {
   searchQuery: '',
   changeSearchQuery: () => {},
+  isCelcius: true,
+  changeTemperatureUnit: () => {},
 };
 
 export default ControlBlock;
