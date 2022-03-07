@@ -12,13 +12,13 @@ const URLS = {
 const API_URL_REQUEST = `${URLS.BASE}${URLS.SEARCH}${URLS.KEY}${URLS.CONFIG}`;
 
 const fetchImage = async (...query) => {
-  const imageQuery = `&tags=${encodeURIComponent(`weather,${query.join(',')}`)}`;
+  const imageQuery = `&tags=${encodeURIComponent(`weather,nature,${query.join()}`)}`;
   const imageSrc = await fetchData(`${API_URL_REQUEST}${imageQuery}`);
   return imageSrc.photos.photo[0].url_l;
 };
 
-const changeBg = async () => {
-  const imageSrc = await fetchImage('winter');
+const changeBg = async (season, daytime, placeName) => {
+  const imageSrc = await fetchImage(season, daytime, placeName);
   document.body.style.backgroundImage = `url(${imageSrc})`;
 };
 

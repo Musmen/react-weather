@@ -8,14 +8,12 @@ import TemperatureSwitcher from '../../components/temperature-switcher/Temperatu
 import LanguageSelect from '../../components/language-select/LanguageSelect';
 import SearchBlock from '../../components/search-block/SeacrhBlock';
 
-import changeBg from '../../api/flickr';
-
 function ControlBlock({ searchQuery, changeSearchQuery, isCelcius, changeTemperatureUnit }) {
   console.log('Render ControlBlock');
   return (
     <div className="control-block">
       <div className="buttons-selects-block">
-        <BgChangeButton changeBg={changeBg} />
+        <BgChangeButton />
         <TemperatureSwitcher isCelcius={isCelcius} changeTemperatureUnit={changeTemperatureUnit} />
         <LanguageSelect />
       </div>
