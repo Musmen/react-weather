@@ -27,7 +27,7 @@ function TodayInfo({ forecast, isCelcius }) {
     <>
       <TimeDateBlock timeZone={timeZone} />
       <DayFullWeather
-        temperature={formatTemperature(isCelcius, temperature)}
+        temperature={formatTemperature(isCelcius, Math.round(temperature))}
         feelsLike={formatTemperature(isCelcius, feelsLike)}
         humidity={humidity}
         windSpeed={windSpeed}

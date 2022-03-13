@@ -1,6 +1,23 @@
-.week-forecast-container {
+.week-forecast-list {
   display: flex;
   justify-content: center;
+
+  .week-forecast-item {
+    text-align: center;
+  }
+
+  .week-day {
+    text-transform: capitalize;
+    font-size: 1.5rem;
+
+    @media only screen and (max-width: 550px) {
+      font-size: 1rem;
+    }
+
+    @media only screen and (max-width: 350px) {
+      font-size: 0.75rem;
+    }
+  }
 
   .day-weather-temperature {
     font-size: 4rem;

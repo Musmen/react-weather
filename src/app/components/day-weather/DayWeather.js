@@ -23,7 +23,7 @@ function DayWeather({ temperature, icon }) {
 
   return (
     <div className="day-weather-container">
-      <span className="day-weather-temperature">{Math.round(temperature)}°</span>
+      <span className="day-weather-temperature">{temperature}°</span>
       <canvas className="day-weather-icon" ref={dayWeatherIcon} width="128" height="128" />
     </div>
   );

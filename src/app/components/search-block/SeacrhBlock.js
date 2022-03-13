@@ -1,9 +1,14 @@
 import './SearchBlock.scss';
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import propTypes from 'prop-types';
 
+import LanguageContext from '../language-context/LanguageContext';
+import { VOCABULARY } from '../../common/vocabulary';
+
 function SearchBlock({ searchQuery, changeSearchQuery }) {
+  const { currentLanguage } = useContext(LanguageContext);
+
   const [searchInputValue, setSearchInutValue] = useState(searchQuery);
 
   const changeSeacrhInputValue = ({ target: { value } }) => {
@@ -35,6 +40,8 @@ function SearchBlock({ searchQuery, changeSearchQuery }) {
     setFormActiveState(false);
   };
 
+  const translatedPlaceholder = VOCABULARY.placeholder[currentLanguage];
+
   return (
     <div className="search__container">
       <form className={`search__form ${isFormActive ? 'active' : ''}`} onSubmit={startSearch}>
@@ -42,7 +49,7 @@ function SearchBlock({ searchQuery, changeSearchQuery }) {
           <input
             className="search__input"
             type="text"
-            placeholder="Search place"
+            placeholder={translatedPlaceholder}
             value={searchInputValue}
             onChange={changeSeacrhInputValue}
             autoComplete="off"

@@ -1,11 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import { getLocalDateObject } from '../../common/helpers';
-import { DEFAULT_TIMEZONE } from '../../common/constants';
-
-function Date({ timeZone }) {
-  const { day, month } = getLocalDateObject(timeZone);
+function Date({ day, month }) {
   return (
     <span className="date">
       {day} {month}
@@ -14,11 +10,13 @@ function Date({ timeZone }) {
 }
 
 Date.propTypes = {
-  timeZone: propTypes.string,
+  day: propTypes.string,
+  month: propTypes.string,
 };
 
 Date.defaultProps = {
-  timeZone: DEFAULT_TIMEZONE,
+  day: '',
+  month: '',
 };
 
 export default Date;

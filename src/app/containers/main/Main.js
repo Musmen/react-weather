@@ -126,7 +126,6 @@ function Main() {
   return (
     <LanguageContext.Provider value={languageState}>
       {isLoading && <Spinner />}
-      <p>{`isCelcius ${isCelcius}`}</p>
       <ControlBlock
         searchQuery={searchQuery}
         changeSearchQuery={changeSearchQuery}

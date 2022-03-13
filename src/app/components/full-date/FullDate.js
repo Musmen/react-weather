@@ -5,26 +5,25 @@ import propTypes from 'prop-types';
 
 import Date from '../date/Date';
 
-import { getLocalDateObject } from '../../common/helpers';
-import { DEFAULT_TIMEZONE } from '../../common/constants';
-
-function FullDate({ timeZone }) {
-  const { weekDay } = getLocalDateObject(timeZone);
-
+function FullDate({ day, month, weekDay }) {
   return (
     <p className="full-date">
       <span className="week-day">{weekDay}</span>
-      <Date timeZone={timeZone} />
+      <Date day={day} month={month} />
     </p>
   );
 }
 
 FullDate.propTypes = {
-  timeZone: propTypes.string,
+  day: propTypes.string,
+  month: propTypes.string,
+  weekDay: propTypes.string,
 };
 
 FullDate.defaultProps = {
-  timeZone: DEFAULT_TIMEZONE,
+  day: '',
+  month: '',
+  weekDay: '',
 };
 
 export default FullDate;

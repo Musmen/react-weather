@@ -78,3 +78,6 @@ export const formatTemperature = (isCelcius, temperatureInCelcius) => {
 
   return Math.round((+temperatureInCelcius * 9) / 5 + 32);
 };
+
+export const getAverage = (...args) =>
+  args.reduce((previusValue, currentValue) => previusValue + currentValue, 0) / args.length;

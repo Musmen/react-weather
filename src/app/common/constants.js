@@ -11,6 +11,8 @@ export const DEFAULT_TIMEZONE = 'Europe/Minsk';
 
 export const ONE_SECOND_IN_MILLISECONDS = 1000;
 
+export const DAYS_IN_A_WEEK = 7;
+
 export const SKYCONS_ICONS_OPTIONS = {
   monochrome: false,
   color: {

@@ -7,7 +7,7 @@ import { getLocalDateObject } from '../../common/helpers';
 import { DEFAULT_TIMEZONE, ONE_SECOND_IN_MILLISECONDS } from '../../common/constants';
 
 function Clock({ timeZone }) {
-  const [time, setTime] = useState(getLocalDateObject(timeZone).time);
+  const [time, setTime] = useState(null);
 
   const tick = useCallback(() => {
     const currentTime = getLocalDateObject(timeZone).time;

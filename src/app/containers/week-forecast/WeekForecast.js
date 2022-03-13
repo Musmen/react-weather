@@ -1,33 +1,46 @@
 import './WeekForecast.scss';
 
-import React from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 
 import DayWeather from '../../components/day-weather/DayWeather';
-import { formatTemperature } from '../../common/helpers';
+import LanguageContext from '../../components/language-context/LanguageContext';
+
+import { formatTemperature, getAverage } from '../../common/helpers';
+import { DAYS_IN_A_WEEK, DEFAULT_TIMEZONE } from '../../common/constants';
+import { ORDER_TO_WEEKDAY } from '../../common/vocabulary';
 
 function WeekForecast({ forecast, isCelcius }) {
   if (!forecast) return null;
 
-  const daysWeather = forecast.daily.slice(1, 4).map((dayWeather) => ({
+  const { currentLanguage } = useContext(LanguageContext);
+
+  const { timezone: timeZone } = forecast;
+  const todayWeekDayIndex = new Date(
+    Date.parse(new Date().toLocaleString('en-US', { timeZone })),
+  ).getDay();
+
+  const daysWeather = forecast.daily.slice(1, 4).map((dayWeather, dayIndex) => ({
     key: dayWeather.dt,
-    temperature: (dayWeather.temp.min + dayWeather.temp.max) / 2,
+    temperature: Math.round(getAverage(dayWeather.temp.min, dayWeather.temp.max)),
     icon: dayWeather.weather[0].icon,
+    weekDayIndex: (todayWeekDayIndex + dayIndex) % DAYS_IN_A_WEEK,
   }));
 
   return (
-    <div className="week-forecast-container">
+    <ul className="week-forecast-list list">
       {daysWeather.map((dayWeather) => {
-        const { key, temperature, icon } = dayWeather;
+        const { key, temperature, icon, weekDayIndex } = dayWeather;
+        const translatedWeekDayString = ORDER_TO_WEEKDAY[currentLanguage][weekDayIndex];
+
         return (
-          <DayWeather
-            key={key}
-            temperature={formatTemperature(isCelcius, temperature)}
-            icon={icon}
-          />
+          <li className="week-forecast-item" key={key}>
+            <span className="week-day">{translatedWeekDayString}</span>
+            <DayWeather temperature={formatTemperature(isCelcius, temperature)} icon={icon} />
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 }
 
@@ -43,12 +56,15 @@ WeekForecast.propTypes = {
         dt: propTypes.number,
       }),
     ),
+    timezone: propTypes.string,
   }),
   isCelcius: propTypes.bool,
 };
 
 WeekForecast.defaultProps = {
-  forecast: {},
+  forecast: {
+    timeZone: DEFAULT_TIMEZONE,
+  },
   isCelcius: true,
 };
 
