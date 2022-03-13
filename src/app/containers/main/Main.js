@@ -1,11 +1,22 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 
 import ControlBlock from '../control-block/ControlBlock';
 import WidgetBlock from '../widget-block/WidgetBlock';
 import LanguageContext from '../../components/language-context/LanguageContext';
 import Spinner from '../../components/spinner/Spinner';
 
-import { DEFAULT_LANGUAGE } from '../../common/constants';
+import updateCoordinates from '../../api/geo-location';
+import {
+  getCoordinatesByPlaceName,
+  getPlaceInfoByGeoCoordinates,
+  parseCoordinates,
+  parseCountry,
+  parsePlace,
+} from '../../api/open-cage';
+import { getForecastByCoordinates } from '../../api/open-weather';
+
+import { DEFAULT_LANGUAGE, DEFAULT_TIMEZONE } from '../../common/constants';
+import changeBgImageByLocation from '../../api/flickr';
 
 function Main() {
   // Language changing functionality
@@ -54,6 +65,64 @@ function Main() {
   );
   // ***************************************
 
+  const [coordinates, setCoordinates] = useState({
+    latitude: null,
+    longitude: null,
+  });
+  const [place, setPlace] = useState(null);
+  const [country, setCountry] = useState(null);
+  const [forecast, setForecast] = useState(null);
+
+  const onLocationChangeHandler = useCallback(async (locationCoordinates) => {
+    setCoordinates(locationCoordinates);
+    const locationResponse = await getPlaceInfoByGeoCoordinates(locationCoordinates);
+    const locationInfo = locationResponse.results[0];
+    const currentPlace = parsePlace(locationInfo);
+    const currentCountry = parseCountry(locationInfo);
+    setPlace(currentPlace);
+    setCountry(currentCountry);
+
+    const forecastResponse = await getForecastByCoordinates(locationCoordinates);
+    setForecast(forecastResponse);
+    const timeZone = forecastResponse ? forecastResponse.timezone : DEFAULT_TIMEZONE;
+
+    changeBgImageByLocation(timeZone, currentCountry, currentPlace);
+
+    changeLoadingState(false);
+  }, []);
+
+  // Geo-location auto-detect functionality
+  useEffect(() => {
+    changeLoadingState(true);
+    updateCoordinates(onLocationChangeHandler);
+    console.log('auto detect coordinates');
+  }, []);
+  // ***************************************
+
+  const onSearchQueryChangeHandler = useCallback(
+    async (placeName) => {
+      if (placeName === '') return;
+      changeLoadingState(true);
+      const placeInfo = await getCoordinatesByPlaceName(placeName);
+      const locationCoordinates = parseCoordinates(placeInfo);
+      onLocationChangeHandler(locationCoordinates);
+      console.log('update coordinates by search query (place name)');
+    },
+    [onLocationChangeHandler],
+  );
+
+  // Changes by search query (place name)
+  useEffect(() => {
+    onSearchQueryChangeHandler(searchQuery);
+  }, [searchQuery, onSearchQueryChangeHandler]);
+  // ***************************************
+
+  const timeZone = forecast ? forecast.timezone : DEFAULT_TIMEZONE;
+
+  const changeBgImageByLocationHandler = useCallback(() => {
+    changeBgImageByLocation(timeZone, country, place);
+  }, [timeZone, place, country]);
+
   return (
     <LanguageContext.Provider value={languageState}>
       {isLoading && <Spinner />}
@@ -63,8 +132,9 @@ function Main() {
         changeSearchQuery={changeSearchQuery}
         isCelcius={isCelcius}
         changeTemperatureUnit={changeTemperatureUnit}
+        changeBgImageByLocationHandler={changeBgImageByLocationHandler}
       />
-      <WidgetBlock searchQuery={searchQuery} changeLoadingState={changeLoadingState} />
+      <WidgetBlock coordinates={coordinates} place={place} country={country} forecast={forecast} />
     </LanguageContext.Provider>
   );
 }

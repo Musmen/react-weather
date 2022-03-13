@@ -1,28 +1,9 @@
 import './PlaceInfo.scss';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
-import { getPlaceInfoByGeoCoordinates, parseCountry, parsePlace } from '../../api/open-cage';
 
-const updatePlaceAndCountry = async (coordinates, setPlace, setCountry) => {
-  const locationResponse = await getPlaceInfoByGeoCoordinates(coordinates);
-  const locationInfo = locationResponse.results[0];
-  setPlace(parsePlace(locationInfo));
-  setCountry(parseCountry(locationInfo));
-};
-
-function PlaceInfo({ coordinates }) {
-  const { latitude, longitude } = coordinates;
-
-  const [place, setPlace] = useState(null);
-  const [country, setCountry] = useState(null);
-
-  useEffect(() => {
-    if (!latitude || !longitude) return;
-    updatePlaceAndCountry(coordinates, setPlace, setCountry);
-    console.log('updatePlace');
-  }, [latitude, longitude]);
-
+function PlaceInfo({ place, country }) {
   return (
     <p className="location-description">
       {place}, {country}
@@ -31,17 +12,13 @@ function PlaceInfo({ coordinates }) {
 }
 
 PlaceInfo.propTypes = {
-  coordinates: propTypes.shape({
-    latitude: propTypes.number,
-    longitude: propTypes.number,
-  }),
+  place: propTypes.string,
+  country: propTypes.string,
 };
 
 PlaceInfo.defaultProps = {
-  coordinates: {
-    latitude: null,
-    longitude: null,
-  },
+  place: '',
+  country: '',
 };
 
 export default PlaceInfo;

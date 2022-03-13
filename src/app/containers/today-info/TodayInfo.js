@@ -19,6 +19,7 @@ function TodayInfo({ forecast }) {
     humidity,
     wind_speed: windSpeed,
   } = forecast.current;
+
   const { icon, description } = forecast.current.weather[0];
 
   return (

@@ -8,12 +8,18 @@ import TemperatureSwitcher from '../../components/temperature-switcher/Temperatu
 import LanguageSelect from '../../components/language-select/LanguageSelect';
 import SearchBlock from '../../components/search-block/SeacrhBlock';
 
-function ControlBlock({ searchQuery, changeSearchQuery, isCelcius, changeTemperatureUnit }) {
+function ControlBlock({
+  searchQuery,
+  changeSearchQuery,
+  isCelcius,
+  changeTemperatureUnit,
+  changeBgImageByLocationHandler,
+}) {
   console.log('Render ControlBlock');
   return (
     <div className="control-block">
       <div className="buttons-selects-block">
-        <BgChangeButton />
+        <BgChangeButton changeBgImageByLocationHandler={changeBgImageByLocationHandler} />
         <TemperatureSwitcher isCelcius={isCelcius} changeTemperatureUnit={changeTemperatureUnit} />
         <LanguageSelect />
       </div>
@@ -27,6 +33,7 @@ ControlBlock.propTypes = {
   changeSearchQuery: propTypes.func,
   isCelcius: propTypes.bool,
   changeTemperatureUnit: propTypes.func,
+  changeBgImageByLocationHandler: propTypes.func,
 };
 
 ControlBlock.defaultProps = {
@@ -34,6 +41,7 @@ ControlBlock.defaultProps = {
   changeSearchQuery: () => {},
   isCelcius: true,
   changeTemperatureUnit: () => {},
+  changeBgImageByLocationHandler: () => {},
 };
 
 export default ControlBlock;

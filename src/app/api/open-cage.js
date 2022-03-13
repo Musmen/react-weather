@@ -19,30 +19,6 @@ export const getPlaceInfoByGeoCoordinates = async ({ latitude, longitude }) => {
   return placeInfo;
 };
 
-const getCoordinatesByPlaceName = async (placeName) => {
-  const placeInfo = await fetchData(`${API_URL_REQUEST}${placeName}`);
-  return placeInfo;
-};
-
-const parseCoordinates = (placeInfo) => {
-  const { lat, lng } = placeInfo.results[0].geometry;
-  return { latitude: lat, longitude: lng };
-};
-
-export const updateCoordinatesByPlaceName = async (
-  placeName,
-  setCoordinates,
-  changeLoadingState,
-) => {
-  changeLoadingState(true);
-  const placeInfo = await getCoordinatesByPlaceName(placeName);
-  const coordinates = parseCoordinates(placeInfo);
-  setCoordinates(coordinates);
-
-  console.log(placeInfo);
-  console.log('updateCoordinatesBySearchQuery');
-};
-
 export const parsePlace = (locationInfo) => {
   const placeInfo = locationInfo.components;
 
@@ -59,3 +35,13 @@ export const parsePlace = (locationInfo) => {
 
 export const parseCountry = (locationInfo) =>
   locationInfo.components.country || locationInfo.formatted || '';
+
+export const parseCoordinates = (placeInfo) => {
+  const { lat, lng } = placeInfo.results[0].geometry;
+  return { latitude: lat, longitude: lng };
+};
+
+export const getCoordinatesByPlaceName = async (placeName) => {
+  const placeInfo = await fetchData(`${API_URL_REQUEST}${placeName}`);
+  return placeInfo;
+};

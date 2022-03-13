@@ -42,3 +42,18 @@ export const OPEN_WEATHER_ICON_TO_SKYCONS_ICON = {
   '11d': 'thunder',
   '11n': 'thunder',
 };
+
+export const MONTH_TO_SEASON = {
+  January: 'winter',
+  February: 'winter',
+  March: 'spring',
+  April: 'spring',
+  May: 'spring',
+  June: 'summer',
+  July: 'summer',
+  August: 'summer',
+  September: 'autumn',
+  October: 'autumn',
+  November: 'autumn',
+  December: 'winter',
+};

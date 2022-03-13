@@ -1,8 +1,7 @@
-const updateCoordinates = (setCoordinates, changeLoadingState) => {
-  changeLoadingState(true);
-  navigator.geolocation.getCurrentPosition(({ coords }) => {
+const updateCoordinates = (onLocationChangeHandler) => {
+  navigator.geolocation.getCurrentPosition(async ({ coords }) => {
     const { latitude, longitude } = coords;
-    setCoordinates({ latitude, longitude });
+    await onLocationChangeHandler({ latitude, longitude });
   });
 };
 

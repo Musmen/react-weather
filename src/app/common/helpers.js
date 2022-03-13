@@ -1,4 +1,4 @@
-import { DEFAULT_TIMEZONE } from './constants';
+import { DEFAULT_TIMEZONE, MONTH_TO_SEASON } from './constants';
 
 // Fetch
 export const fetchData = async (url) => {
@@ -56,5 +56,19 @@ export const getLocalDateObject = (timeZone) => {
   const [hour] = time.split(':');
 
   return { weekDay, month, day, time, hour };
+};
+
+export const getDayTime = (timeZone) => {
+  const hour = +getLocalDateObject(timeZone).hour;
+
+  if (hour >= 6 && hour < 12) return 'morning';
+  if (hour >= 12 && hour < 18) return 'day';
+  if (hour >= 18 && hour < 24) return 'evening';
+  return 'night';
+};
+
+export const getSeason = (timeZone) => {
+  const { month } = getLocalDateObject(timeZone);
+  return MONTH_TO_SEASON[month];
 };
 // ***************************
