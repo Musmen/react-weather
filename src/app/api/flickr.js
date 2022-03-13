@@ -19,12 +19,23 @@ const fetchImage = async (...query) => {
   return imageSrc.photos.photo[randomImageIndexFromResponse].url_l;
 };
 
-const changeBgImage = async (season, daytime, country, place) => {
+const changeBgImageWithPreloading = async (season, daytime, country, place) => {
   const imageSrc = await fetchImage(season, daytime, country, place);
-  document.body.style.backgroundImage = `url(${imageSrc})`;
+  const tagForPreloadedImage = document.createElement('img');
+
+  return new Promise((resolve) => {
+    const onBgImagePreloadHandler = () => {
+      document.body.style.backgroundImage = `url(${imageSrc})`;
+      tagForPreloadedImage.removeEventListener('load', onBgImagePreloadHandler);
+      resolve();
+    };
+
+    tagForPreloadedImage.addEventListener('load', onBgImagePreloadHandler);
+    tagForPreloadedImage.src = imageSrc;
+  });
 };
 
-const changeBgImageByLocation = (timeZone, country, place) => {
+export const changeBgImageWithPreloadingByLocation = async (timeZone, country, place) => {
   const season = getSeason(timeZone);
   const dayTime = getDayTime(timeZone);
   console.log(
@@ -37,7 +48,5 @@ const changeBgImageByLocation = (timeZone, country, place) => {
     ', place: ',
     place,
   );
-  changeBgImage(season, dayTime, country, place);
+  return changeBgImageWithPreloading(season, dayTime, country, place);
 };
-
-export default changeBgImageByLocation;

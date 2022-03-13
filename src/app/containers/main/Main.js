@@ -16,7 +16,7 @@ import {
 import { getForecastByCoordinates } from '../../api/open-weather';
 
 import { DEFAULT_LANGUAGE, DEFAULT_TIMEZONE } from '../../common/constants';
-import changeBgImageByLocation from '../../api/flickr';
+import { changeBgImageWithPreloadingByLocation } from '../../api/flickr';
 
 function Main() {
   // Language changing functionality
@@ -73,6 +73,12 @@ function Main() {
   const [country, setCountry] = useState(null);
   const [forecast, setForecast] = useState(null);
 
+  const timeZone = forecast ? forecast.timezone : DEFAULT_TIMEZONE;
+
+  const changeBgImageByLocationHandler = useCallback(() => {
+    changeBgImageWithPreloadingByLocation(timeZone, country, place);
+  }, [timeZone, place, country]);
+
   const onLocationChangeHandler = useCallback(async (locationCoordinates) => {
     setCoordinates(locationCoordinates);
     const locationResponse = await getPlaceInfoByGeoCoordinates(locationCoordinates);
@@ -84,9 +90,9 @@ function Main() {
 
     const forecastResponse = await getForecastByCoordinates(locationCoordinates);
     setForecast(forecastResponse);
-    const timeZone = forecastResponse ? forecastResponse.timezone : DEFAULT_TIMEZONE;
 
-    changeBgImageByLocation(timeZone, currentCountry, currentPlace);
+    const currentTimeZone = forecastResponse ? forecastResponse.timezone : DEFAULT_TIMEZONE;
+    await changeBgImageWithPreloadingByLocation(currentTimeZone, currentCountry, currentPlace);
 
     changeLoadingState(false);
   }, []);
@@ -116,12 +122,6 @@ function Main() {
     onSearchQueryChangeHandler(searchQuery);
   }, [searchQuery, onSearchQueryChangeHandler]);
   // ***************************************
-
-  const timeZone = forecast ? forecast.timezone : DEFAULT_TIMEZONE;
-
-  const changeBgImageByLocationHandler = useCallback(() => {
-    changeBgImageByLocation(timeZone, country, place);
-  }, [timeZone, place, country]);
 
   return (
     <LanguageContext.Provider value={languageState}>
