@@ -4,8 +4,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import DayWeather from '../../components/day-weather/DayWeather';
+import { formatTemperature } from '../../common/helpers';
 
-function WeekForecast({ forecast }) {
+function WeekForecast({ forecast, isCelcius }) {
   if (!forecast) return null;
 
   const daysWeather = forecast.daily.slice(1, 4).map((dayWeather) => ({
@@ -18,7 +19,13 @@ function WeekForecast({ forecast }) {
     <div className="week-forecast-container">
       {daysWeather.map((dayWeather) => {
         const { key, temperature, icon } = dayWeather;
-        return <DayWeather key={key} temperature={temperature} icon={icon} />;
+        return (
+          <DayWeather
+            key={key}
+            temperature={formatTemperature(isCelcius, temperature)}
+            icon={icon}
+          />
+        );
       })}
     </div>
   );
@@ -37,10 +44,12 @@ WeekForecast.propTypes = {
       }),
     ),
   }),
+  isCelcius: propTypes.bool,
 };
 
 WeekForecast.defaultProps = {
   forecast: {},
+  isCelcius: true,
 };
 
 export default WeekForecast;

@@ -72,3 +72,9 @@ export const getSeason = (timeZone) => {
   return MONTH_TO_SEASON[month];
 };
 // ***************************
+
+export const formatTemperature = (isCelcius, temperatureInCelcius) => {
+  if (isCelcius) return temperatureInCelcius;
+
+  return Math.round((+temperatureInCelcius * 9) / 5 + 32);
+};

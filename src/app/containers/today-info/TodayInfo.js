@@ -7,8 +7,9 @@ import TimeDateBlock from '../time-date-block/TimeDateBlock';
 import DayFullWeather from '../day-full-weather/DayFullWeather';
 
 import { DEFAULT_TIMEZONE } from '../../common/constants';
+import { formatTemperature } from '../../common/helpers';
 
-function TodayInfo({ forecast }) {
+function TodayInfo({ forecast, isCelcius }) {
   if (!forecast) return null;
 
   const { timezone: timeZone } = forecast;
@@ -26,8 +27,8 @@ function TodayInfo({ forecast }) {
     <>
       <TimeDateBlock timeZone={timeZone} />
       <DayFullWeather
-        temperature={temperature}
-        feelsLike={feelsLike}
+        temperature={formatTemperature(isCelcius, temperature)}
+        feelsLike={formatTemperature(isCelcius, feelsLike)}
         humidity={humidity}
         windSpeed={windSpeed}
         description={description}
@@ -63,12 +64,14 @@ TodayInfo.propTypes = {
     ),
     timezone: propTypes.string,
   }),
+  isCelcius: propTypes.bool,
 };
 
 TodayInfo.defaultProps = {
   forecast: {
     timeZone: DEFAULT_TIMEZONE,
   },
+  isCelcius: true,
 };
 
 export default TodayInfo;

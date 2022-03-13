@@ -117,7 +117,7 @@ function Main() {
     [onLocationChangeHandler],
   );
 
-  // Changes by search query (place name)
+  // Change location by search query (place name)
   useEffect(() => {
     onSearchQueryChangeHandler(searchQuery);
   }, [searchQuery, onSearchQueryChangeHandler]);
@@ -134,7 +134,13 @@ function Main() {
         changeTemperatureUnit={changeTemperatureUnit}
         changeBgImageByLocationHandler={changeBgImageByLocationHandler}
       />
-      <WidgetBlock coordinates={coordinates} place={place} country={country} forecast={forecast} />
+      <WidgetBlock
+        coordinates={coordinates}
+        place={place}
+        country={country}
+        forecast={forecast}
+        isCelcius={isCelcius}
+      />
     </LanguageContext.Provider>
   );
 }
