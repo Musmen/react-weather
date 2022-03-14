@@ -19,22 +19,6 @@ import { DEFAULT_LANGUAGE, DEFAULT_TIMEZONE } from '../../common/constants';
 import { changeBgImageWithPreloadingByLocation } from '../../api/flickr';
 
 function Main() {
-  // Language changing functionality
-  const [currentLanguage, setLanguage] = useState(DEFAULT_LANGUAGE);
-
-  const changeLanguage = useCallback(
-    ({ target: { value } }) => {
-      setLanguage(value);
-    },
-    [setLanguage],
-  );
-
-  const languageState = useMemo(
-    () => ({ currentLanguage, changeLanguage }),
-    [currentLanguage, changeLanguage],
-  );
-  // ***************************************
-
   // Temperature unit changing functionality
   const [isCelcius, setTemperatureUnit] = useState(true);
 
@@ -65,6 +49,7 @@ function Main() {
   );
   // ***************************************
 
+  const [currentLanguage, setLanguage] = useState(DEFAULT_LANGUAGE);
   const [coordinates, setCoordinates] = useState({
     latitude: null,
     longitude: null,
@@ -79,28 +64,55 @@ function Main() {
     changeBgImageWithPreloadingByLocation(timeZone, country, place);
   }, [timeZone, place, country]);
 
-  const onLocationChangeHandler = useCallback(async (locationCoordinates) => {
-    setCoordinates(locationCoordinates);
-    const locationResponse = await getPlaceInfoByGeoCoordinates(locationCoordinates);
-    const locationInfo = locationResponse.results[0];
-    const currentPlace = parsePlace(locationInfo);
-    const currentCountry = parseCountry(locationInfo);
-    setPlace(currentPlace);
-    setCountry(currentCountry);
+  const onLocationChangeHandler = useCallback(
+    async (locationCoordinates, language, needToChangeBgImage = true) => {
+      setCoordinates(locationCoordinates);
+      const locationResponse = await getPlaceInfoByGeoCoordinates({
+        ...locationCoordinates,
+        language,
+      });
+      const locationInfo = locationResponse.results[0];
+      const currentPlace = parsePlace(locationInfo);
+      const currentCountry = parseCountry(locationInfo);
+      setPlace(currentPlace);
+      setCountry(currentCountry);
 
-    const forecastResponse = await getForecastByCoordinates(locationCoordinates);
-    setForecast(forecastResponse);
+      const forecastResponse = await getForecastByCoordinates({
+        ...locationCoordinates,
+        language,
+      });
+      setForecast(forecastResponse);
 
-    const currentTimeZone = forecastResponse ? forecastResponse.timezone : DEFAULT_TIMEZONE;
-    await changeBgImageWithPreloadingByLocation(currentTimeZone, currentCountry, currentPlace);
+      if (needToChangeBgImage) {
+        const currentTimeZone = forecastResponse ? forecastResponse.timezone : DEFAULT_TIMEZONE;
+        await changeBgImageWithPreloadingByLocation(currentTimeZone, currentCountry, currentPlace);
+      }
 
-    changeLoadingState(false);
-  }, []);
+      changeLoadingState(false);
+    },
+    [],
+  );
+
+  // Language changing functionality
+  const changeLanguageHandler = useCallback(
+    ({ target: { value } }) => {
+      setLanguage(value);
+      changeLoadingState(true);
+      onLocationChangeHandler(coordinates, value, false);
+    },
+    [coordinates],
+  );
+
+  const languageState = useMemo(
+    () => ({ currentLanguage, changeLanguageHandler }),
+    [currentLanguage, changeLanguageHandler],
+  );
+  // ***************************************
 
   // Geo-location auto-detect functionality
   useEffect(() => {
     changeLoadingState(true);
-    updateCoordinates(onLocationChangeHandler);
+    updateCoordinates(onLocationChangeHandler, currentLanguage);
     console.log('auto detect coordinates');
   }, []);
   // ***************************************
@@ -111,16 +123,16 @@ function Main() {
       changeLoadingState(true);
       const placeInfo = await getCoordinatesByPlaceName(placeName);
       const locationCoordinates = parseCoordinates(placeInfo);
-      onLocationChangeHandler(locationCoordinates);
+      onLocationChangeHandler(locationCoordinates, currentLanguage);
       console.log('update coordinates by search query (place name)');
     },
-    [onLocationChangeHandler],
+    [onLocationChangeHandler, currentLanguage],
   );
 
   // Change location by search query (place name)
   useEffect(() => {
     onSearchQueryChangeHandler(searchQuery);
-  }, [searchQuery, onSearchQueryChangeHandler]);
+  }, [searchQuery]);
   // ***************************************
 
   return (

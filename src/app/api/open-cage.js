@@ -1,3 +1,4 @@
+import { DEFAULT_LANGUAGE, LANGUAGE_TO_API_LANG_CODE } from '../common/constants';
 import { fetchData } from '../common/helpers';
 
 const API_KEY = process.env.OPEN_CAGE_KEY;
@@ -7,15 +8,20 @@ const URLS = {
   GEOCODING: 'geocode/v1/json',
   KEY: `?key=${API_KEY}`,
   QUERY: `&q=`,
-  LANGUAGE: '&language=ru',
+  LANGUAGE: '&language=',
   PRETTY: '&pretty=1',
 };
 
-const API_URL_REQUEST = `${URLS.BASE}${URLS.GEOCODING}${URLS.KEY}${URLS.LANGUAGE}${URLS.PRETTY}${URLS.QUERY}`;
+const API_URL_REQUEST = `${URLS.BASE}${URLS.GEOCODING}${URLS.KEY}${URLS.PRETTY}${URLS.QUERY}`;
 
-export const getPlaceInfoByGeoCoordinates = async ({ latitude, longitude }) => {
+export const getPlaceInfoByGeoCoordinates = async ({
+  latitude,
+  longitude,
+  language = DEFAULT_LANGUAGE,
+}) => {
+  const languageQuery = `${URLS.LANGUAGE}${LANGUAGE_TO_API_LANG_CODE[language]}`;
   const coordinatesQuery = `${latitude}+${longitude}`;
-  const placeInfo = await fetchData(`${API_URL_REQUEST}${coordinatesQuery}`);
+  const placeInfo = await fetchData(`${API_URL_REQUEST}${coordinatesQuery}${languageQuery}`);
   return placeInfo;
 };
 

@@ -1,5 +1,12 @@
 export const LANGUAGES = ['eng', 'rus', 'bel'];
+
 export const DEFAULT_LANGUAGE = LANGUAGES[0];
+
+export const LANGUAGE_TO_API_LANG_CODE = {
+  eng: 'en',
+  rus: 'ru',
+  bel: 'be',
+};
 
 const MAP_ZOOM_DEFAULT = 7;
 export const DEFAULT_MAP_CONFIG = {
