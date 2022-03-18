@@ -6,10 +6,10 @@ import propTypes from 'prop-types';
 import TimeDateBlock from '../time-date-block/TimeDateBlock';
 import DayFullWeather from '../day-full-weather/DayFullWeather';
 
-import { DEFAULT_TIMEZONE } from '../../common/constants';
 import { formatTemperature } from '../../common/helpers';
+import { DEFAULT_IS_CELSIUS_TEMPERATURE_UNIT, DEFAULT_TIMEZONE } from '../../common/constants';
 
-function TodayInfo({ forecast, isCelcius }) {
+function TodayInfo({ forecast, isCelsius }) {
   if (!forecast) return null;
 
   const { timezone: timeZone } = forecast;
@@ -27,8 +27,8 @@ function TodayInfo({ forecast, isCelcius }) {
     <>
       <TimeDateBlock timeZone={timeZone} />
       <DayFullWeather
-        temperature={formatTemperature(isCelcius, Math.round(temperature))}
-        feelsLike={formatTemperature(isCelcius, feelsLike)}
+        temperature={formatTemperature(isCelsius, Math.round(temperature))}
+        feelsLike={formatTemperature(isCelsius, feelsLike)}
         humidity={humidity}
         windSpeed={windSpeed}
         description={description}
@@ -64,14 +64,14 @@ TodayInfo.propTypes = {
     ),
     timezone: propTypes.string,
   }),
-  isCelcius: propTypes.bool,
+  isCelsius: propTypes.bool,
 };
 
 TodayInfo.defaultProps = {
   forecast: {
     timeZone: DEFAULT_TIMEZONE,
   },
-  isCelcius: true,
+  isCelsius: DEFAULT_IS_CELSIUS_TEMPERATURE_UNIT,
 };
 
 export default TodayInfo;

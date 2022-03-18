@@ -8,6 +8,8 @@ export const LANGUAGE_TO_API_LANG_CODE = {
   bel: 'be',
 };
 
+export const DEFAULT_IS_CELSIUS_TEMPERATURE_UNIT = true;
+
 const MAP_ZOOM_DEFAULT = 7;
 export const DEFAULT_MAP_CONFIG = {
   style: 'mapbox://styles/mapbox/outdoors-v11',

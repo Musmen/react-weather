@@ -7,10 +7,14 @@ import DayWeather from '../../components/day-weather/DayWeather';
 import LanguageContext from '../../components/language-context/LanguageContext';
 
 import { formatTemperature, getAverage } from '../../common/helpers';
-import { DAYS_IN_A_WEEK, DEFAULT_TIMEZONE } from '../../common/constants';
+import {
+  DAYS_IN_A_WEEK,
+  DEFAULT_IS_CELSIUS_TEMPERATURE_UNIT,
+  DEFAULT_TIMEZONE,
+} from '../../common/constants';
 import { ORDER_TO_WEEKDAY } from '../../common/vocabulary';
 
-function WeekForecast({ forecast, isCelcius }) {
+function WeekForecast({ forecast, isCelsius }) {
   if (!forecast) return null;
 
   const { currentLanguage } = useContext(LanguageContext);
@@ -36,7 +40,7 @@ function WeekForecast({ forecast, isCelcius }) {
         return (
           <li className="week-forecast-item" key={key}>
             <span className="week-day">{translatedWeekDayString}</span>
-            <DayWeather temperature={formatTemperature(isCelcius, temperature)} icon={icon} />
+            <DayWeather temperature={formatTemperature(isCelsius, temperature)} icon={icon} />
           </li>
         );
       })}
@@ -58,14 +62,14 @@ WeekForecast.propTypes = {
     ),
     timezone: propTypes.string,
   }),
-  isCelcius: propTypes.bool,
+  isCelsius: propTypes.bool,
 };
 
 WeekForecast.defaultProps = {
   forecast: {
     timeZone: DEFAULT_TIMEZONE,
   },
-  isCelcius: true,
+  isCelsius: DEFAULT_IS_CELSIUS_TEMPERATURE_UNIT,
 };
 
 export default WeekForecast;

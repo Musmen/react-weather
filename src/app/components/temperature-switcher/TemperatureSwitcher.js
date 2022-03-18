@@ -3,7 +3,9 @@ import './TemperatureSwitcher.scss';
 import React from 'react';
 import propTypes from 'prop-types';
 
-function TemperatureSwitcher({ isCelcius, changeTemperatureUnit }) {
+import { DEFAULT_IS_CELSIUS_TEMPERATURE_UNIT } from '../../common/constants';
+
+function TemperatureSwitcher({ isCelsius, changeTemperatureUnit }) {
   return (
     <div className="switcher__container">
       <label className="switcher__label" htmlFor="switcher">
@@ -13,7 +15,7 @@ function TemperatureSwitcher({ isCelcius, changeTemperatureUnit }) {
           name="switcher"
           id="switcher"
           onChange={changeTemperatureUnit}
-          checked={isCelcius}
+          checked={isCelsius}
         />
         <span className="switcher__inner" />
         <span className="switcher__switch" />
@@ -23,12 +25,12 @@ function TemperatureSwitcher({ isCelcius, changeTemperatureUnit }) {
 }
 
 TemperatureSwitcher.propTypes = {
-  isCelcius: propTypes.bool,
+  isCelsius: propTypes.bool,
   changeTemperatureUnit: propTypes.func,
 };
 
 TemperatureSwitcher.defaultProps = {
-  isCelcius: true,
+  isCelsius: DEFAULT_IS_CELSIUS_TEMPERATURE_UNIT,
   changeTemperatureUnit: () => {},
 };
 

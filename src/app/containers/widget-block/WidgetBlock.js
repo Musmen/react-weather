@@ -7,16 +7,17 @@ import PlaceInfo from '../../components/place-info/PlaceInfo';
 import MapBlock from '../map-block/MapBlock';
 import TodayInfo from '../today-info/TodayInfo';
 import WeekForecast from '../week-forecast/WeekForecast';
-import { DEFAULT_TIMEZONE } from '../../common/constants';
 
-function WidgetBlock({ coordinates, place, country, forecast, isCelcius }) {
+import { DEFAULT_IS_CELSIUS_TEMPERATURE_UNIT, DEFAULT_TIMEZONE } from '../../common/constants';
+
+function WidgetBlock({ coordinates, place, country, forecast, isCelsius }) {
   console.log('Render WidgetBlock');
   return (
     <div className="main-container">
       <div className="left-container">
         <PlaceInfo place={place} country={country} />
-        <TodayInfo forecast={forecast} isCelcius={isCelcius} />
-        <WeekForecast forecast={forecast} isCelcius={isCelcius} />
+        <TodayInfo forecast={forecast} isCelsius={isCelsius} />
+        <WeekForecast forecast={forecast} isCelsius={isCelsius} />
       </div>
       <MapBlock coordinates={coordinates} />
     </div>
@@ -55,7 +56,7 @@ WidgetBlock.propTypes = {
     ),
     timezone: propTypes.string,
   }),
-  isCelcius: propTypes.bool,
+  isCelsius: propTypes.bool,
 };
 
 WidgetBlock.defaultProps = {
@@ -68,7 +69,7 @@ WidgetBlock.defaultProps = {
   forecast: {
     timeZone: DEFAULT_TIMEZONE,
   },
-  isCelcius: true,
+  isCelsius: DEFAULT_IS_CELSIUS_TEMPERATURE_UNIT,
 };
 
 export default WidgetBlock;

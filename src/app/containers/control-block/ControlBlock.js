@@ -8,10 +8,12 @@ import TemperatureSwitcher from '../../components/temperature-switcher/Temperatu
 import LanguageSelect from '../../components/language-select/LanguageSelect';
 import SearchBlock from '../../components/search-block/SeacrhBlock';
 
+import { DEFAULT_IS_CELSIUS_TEMPERATURE_UNIT } from '../../common/constants';
+
 function ControlBlock({
   searchQuery,
   changeSearchQuery,
-  isCelcius,
+  isCelsius,
   changeTemperatureUnit,
   changeBgImageByLocationHandler,
 }) {
@@ -20,7 +22,7 @@ function ControlBlock({
     <div className="control-block">
       <div className="buttons-selects-block">
         <BgChangeButton changeBgImageByLocationHandler={changeBgImageByLocationHandler} />
-        <TemperatureSwitcher isCelcius={isCelcius} changeTemperatureUnit={changeTemperatureUnit} />
+        <TemperatureSwitcher isCelsius={isCelsius} changeTemperatureUnit={changeTemperatureUnit} />
         <LanguageSelect />
       </div>
       <SearchBlock searchQuery={searchQuery} changeSearchQuery={changeSearchQuery} />
@@ -31,7 +33,7 @@ function ControlBlock({
 ControlBlock.propTypes = {
   searchQuery: propTypes.string,
   changeSearchQuery: propTypes.func,
-  isCelcius: propTypes.bool,
+  isCelsius: propTypes.bool,
   changeTemperatureUnit: propTypes.func,
   changeBgImageByLocationHandler: propTypes.func,
 };
@@ -39,7 +41,7 @@ ControlBlock.propTypes = {
 ControlBlock.defaultProps = {
   searchQuery: '',
   changeSearchQuery: () => {},
-  isCelcius: true,
+  isCelsius: DEFAULT_IS_CELSIUS_TEMPERATURE_UNIT,
   changeTemperatureUnit: () => {},
   changeBgImageByLocationHandler: () => {},
 };
